@@ -1,0 +1,48 @@
+Functionality/Feature List
+---------------------------
+Landing Page
+    design
+
+Login/Registration
+    validation
+
+NavBar
+    Shows clickable logo to take you home (all products page)
+    Login/Logout/Register buttons
+    Hi {{user.name}} - click link to take to persons account (not necessary at this time but would be good functional option down the road)
+    shows cart and accumulating # of items in the cart- click to take you to the order-summary page
+
+Products
+    display all products
+    categories to choose from and display only that category when clicked
+
+Product Details
+    select quantity
+    select size
+    select color
+    add to cart
+
+Cart
+    displays order summary
+    Continue shopping or Checkout buttons
+
+Checkout
+    shows order summary
+    remove/update/cancel order
+    checkout form 
+        user info such as address
+        payment options
+        discount codes if necessary
+        continue to checkout button
+
+Admin
+    admin Login
+    dashboard displays all orders
+    View orders
+    view products
+    ability to view/edit/update orders
+    add new products or edit products
+
+
+
+

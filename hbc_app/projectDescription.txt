@@ -1,0 +1,4 @@
+Project Description
+--------------------------------
+
+An real life ecommerce site for a small business boutique. 
