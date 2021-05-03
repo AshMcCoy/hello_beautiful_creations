@@ -17,6 +17,13 @@ class ProductView(DetailView):
     model= Item
     template_name= "product.html"
 
+def is_valid_form(values):
+    valid = True
+    for field in values:
+        if field == '':
+            valid = False
+    return valid
+
 @login_required
 def add_to_cart(request, pk):
     item = get_object_or_404(Item, pk=pk)

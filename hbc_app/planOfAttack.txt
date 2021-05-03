@@ -1,0 +1,33 @@
+(completed) Monday (5/3/21): Finish the Registration- I have login but do not have registration (.5 hr- 1 hr)
+
+Tuesday: Add the ImageField to the Product model and update accordingly; get all the products loaded into the database; also need to add a dropdown select option for size the user is ordering as well as color (1-2 hours)
+
+Wednesday: Create landing page; update the links on products page to direct accordingly such as the category links, cart, logout, and search (2 hours)
+
+Thursday: Update the checkout form and complete the checkout process; will need to add payment processes here (2 hours)
+
+Friday: Update CSS to be uniform and aesthetically pleasing using MDB / Bootstrap; figure out why logo image is not showing up on the product detail page (2-3 hrs)
+
+Saturday: Begin admin dashboard; Complete Admin Login, and the html dashboard view (2-4 hrs)
+
+Sunday: Work on and try to complete the /admin-order/product-ImageField (2-3 hrs)
+
+Monday (5/10/21): Complete /admin-products page (2-4 hrs)
+
+Tuesday: Complete Add/Edit product page (2-4 hrs)
+
+Wednesday: Complete any functionality that has not been completed yet (2 hrs)
+
+Thursday: Update CSS to be uniform and aesthetically pleasing (2 hrs)   
+
+Friday: Run through site and make sure all functions are working properly. Fix any bugs (1-2 hrs)
+
+
+Things I would like to have: 
+
+* If I run ahead of schedule- would like to have a modal pop up for login and registration on the landing page as opposed to redirecting to another html page to login. 
+
+*Also would like to add a user account profile that they can see and update their information if necessary such as address, password, etc. 
+
+*Would like the user to have a wishlist and can favorite certain items they view. 
+
