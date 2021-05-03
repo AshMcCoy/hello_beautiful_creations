@@ -15,11 +15,24 @@ CATEGORY = (
     ('M', 'Misc'),
 )
 
-LABEL = (
-    ('N', 'New'),
-    ('BS', 'Best Seller'),
-    ('H', 'Holiday'),
-    ('F', 'Featured'),
+CHOICES = (
+    ('Dark Heather', 'Dark Heather'),
+    ('Heather Navy', 'Heather Navy'),
+    ('Heather Indigo', 'Heather Indigo'),
+    ('Heather Royal', 'Heather Royal'),
+    ('Heather Sapphire', 'Heather Sapphire'),
+    ('Heather Galapagos Blue', 'Heather Galapagos Blue'),
+    ('Heather Seafoam', 'Heather Seafoam'),
+    ('Heather Irish Green', 'Heather Irish Green'),
+    ('Heather Military Green', 'Heather Military Green'),
+    ('Heather Maroon', 'Heather Maroon'),
+    ('Heather Purple', 'Heather Purple'),
+    ('Heather Berry', 'Heather Berry'),
+    ('Heather Helonica', 'Heather Helonica'),
+    ('Heather Coral Silk', 'Heather Coral Silk'),
+    ('Heather Orange', 'Heather Orange'),
+    ('Heather Cardinal', 'Heather Cardinal'),
+    ('Heather Red', 'Heather Red'),
 )
 
 class Item(models.Model):
@@ -27,8 +40,9 @@ class Item(models.Model):
     price = models.FloatField()
     discount_price = models.FloatField(blank= True, null= True)
     category = models.CharField(choices= CATEGORY, max_length= 3)
-    label = models.CharField(choices= LABEL, max_length= 3, blank=True, null=True)
+    image = models.ImageField(null= True, blank= True)
     description = models.TextField()
+    shirt_color = models.CharField(max_length= 50, choices=CHOICES, default= 'Dark Heather')
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
     #"user_ordered"= []

@@ -12,7 +12,7 @@
             <!--Grid column-->
             <div class="col-md-6 mb-4">
 
-            <img src="https://mdbootstrap.com/img/Photos/Horizontal/E-commerce/Vertical/12.jpg" class="img-fluid" alt="">
+            <img src="{{ item.image.url }}" class="img-fluid" alt="">
 
             </div>
             <!--Grid column-->
@@ -26,9 +26,6 @@
                 <div class="mb-3">
                 <a href="">
                     <span class="badge purple mr-1">{{ object.get_category_display }}</span>
-                </a>
-                <a href="">
-                    <span class="badge blue mr-1">{{ object.get_label_display }}</span>
                 </a>
                 </div>
 
@@ -58,10 +55,10 @@
 
                 </form> {% endcomment %}
 
-                <a href="{{ object.get_add_to_cart_url }}" class="btn btn-primary btn-md my-0 p" >Add to cart
+                <a href="{{ object.get_add_to_cart_url }}" class="btn btn-default btn-md my-0 p" >Add to cart
                     <i class="fas fa-shopping-cart ml-1"></i>
                 </a>
-                <a href="{{ object.get_remove_from_cart_url }}" class="btn btn-danger btn-md my-0 p" >Remove From cart
+                <a href="{{ object.get_remove_from_cart_url }}" class="btn btn-secondary btn-md my-0 p" >Remove From cart
                     <i class="fas fa-trash ml-1"></i>
                 </a>
 
