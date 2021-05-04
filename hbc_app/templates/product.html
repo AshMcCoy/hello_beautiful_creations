@@ -52,15 +52,34 @@
                 <button class="btn btn-primary btn-md my-0 p" type="submit">Add to cart
                     <i class="fas fa-shopping-cart ml-1"></i>
                 </button>
-
                 </form> {% endcomment %}
-
-                <a href="{{ object.get_add_to_cart_url }}" class="btn btn-default btn-md my-0 p" >Add to cart
-                    <i class="fas fa-shopping-cart ml-1"></i>
-                </a>
-                <a href="{{ object.get_remove_from_cart_url }}" class="btn btn-secondary btn-md my-0 p" >Remove From cart
-                    <i class="fas fa-trash ml-1"></i>
-                </a>
+                <div class="form-group">
+                    <select name="shirt_color_dropdown" class="form-select" aria-label= "Default select example">
+                        <option value="-1">Select Shirt Color</option>
+                        <option value="{{ item.shirt_color }}">{{ item.shirt_color }}</option>
+                    </select>
+                    <select name="size" class="form-select ml-3" aria-label= "Default select example">
+                        <option value="-1">Select Shirt Size</option>
+                        <option value="youth_extra_small">Youth Extra Small</option>
+                        <option value="youth_small">Youth Small</option>
+                        <option value="youth_medium">Youth Medium</option>
+                        <option value="youth_large">Youth Large</option>
+                        <option value="extra_small">Extra Small</option>
+                        <option value="small">Small</option>
+                        <option value="medium">Medium</option>
+                        <option value="large">Large</option>
+                        <option value="extra_large">Extra Large</option>
+                        <option value="2x">2X</option>
+                    </select>
+                </div>
+                <div class="mt-4">
+                    <a href="{{ object.get_add_to_cart_url }}" class="btn btn-default btn-md my-0 p" >Add to cart
+                        <i class="fas fa-shopping-cart ml-1"></i>
+                    </a>
+                    <a href="{{ object.get_remove_from_cart_url }}" class="btn btn-secondary btn-md my-0 p" >Remove From cart
+                        <i class="fas fa-trash ml-1"></i>
+                    </a>
+                </div>
 
             </div>
             <!--Content-->

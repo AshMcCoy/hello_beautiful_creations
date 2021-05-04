@@ -8,6 +8,8 @@ from django.utils import timezone
 from .forms import CheckoutForm
 from .models import (Item, Order, OrderItem, CheckoutAddress)
 
+def landing(request):
+    return render(request, 'landing.html')
 class HomeView(ListView):
     model = Item
     paginate_by = 12

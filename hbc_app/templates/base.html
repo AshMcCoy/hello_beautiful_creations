@@ -17,6 +17,9 @@
     <link href="{% static 'css/mdb.min.css' %}" rel="stylesheet">
     <!-- Your custom styles (optional) -->
     <link href=" {% static 'css/style.min.css' %}" rel="stylesheet">
+    <!--Google Fonts-->
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Cookie&family=Dancing+Script&display=swap" rel="stylesheet">
     <style type="text/css">
         html,
         body,
@@ -84,7 +87,7 @@
             
                 {% if user.is_authenticated %}
                 <li class="nav-item">
-                    <a class="nav-link waves-effect">
+                    <a class="nav-link waves-effect" href="{% url 'hbc_app:order-summary' %}">
                     {% if request.user|cart_item_count != 0 %}
                     <span class="badge red z-depth-1 mr-1"> {{ request.user|cart_item_count }} </span>
                     {% endif %}
