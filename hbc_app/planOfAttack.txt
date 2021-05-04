@@ -1,6 +1,6 @@
 (completed) Monday (5/3/21): Finish the Registration- I have login but do not have registration (.5 hr- 1 hr)
 
-Tuesday: Add the ImageField to the Product model and update accordingly; get all the products loaded into the database; also need to add a dropdown select option for size the user is ordering as well as color (1-2 hours)
+Tuesday: (done) Add the ImageField to the Product model and update accordingly; (done)get all the products loaded into the database; also need to add a dropdown select option for size the user is ordering as well as color (1-2 hours)
 
 Wednesday: Create landing page; update the links on products page to direct accordingly such as the category links, cart, logout, and search (2 hours)
 

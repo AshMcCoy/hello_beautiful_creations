@@ -7,6 +7,7 @@ CATEGORY = (
     ('RB', 'Ribbon Bows'),
     ('CB', 'Cloth Bows'),
     ('LB', 'Leather Bows'),
+    ('HW', 'Head Wraps'),
     ('E', 'Earrings'),
     ('NCK', 'Necklaces'),
     ('BC', 'Baby Clothing'),
@@ -33,6 +34,8 @@ CHOICES = (
     ('Heather Orange', 'Heather Orange'),
     ('Heather Cardinal', 'Heather Cardinal'),
     ('Heather Red', 'Heather Red'),
+    ('White', 'White'),
+    ('None', 'None'),
 )
 
 class Item(models.Model):
@@ -42,7 +45,7 @@ class Item(models.Model):
     category = models.CharField(choices= CATEGORY, max_length= 3)
     image = models.ImageField(null= True, blank= True)
     description = models.TextField()
-    shirt_color = models.CharField(max_length= 50, choices=CHOICES, default= 'Dark Heather')
+    shirt_color = models.CharField(max_length= 50, choices=CHOICES, null= True, blank=True)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
     #"user_ordered"= []
