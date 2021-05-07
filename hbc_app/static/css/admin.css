@@ -1,0 +1,17 @@
+#header {
+    background: #365B6D;
+    color: white;
+}
+
+#branding h1 {
+    color: white;
+    height: 75px;
+}
+
+div.breadcrumbs {
+    background: #2BBBAD;
+}
+
+.button, input[type=submit], input[type=button], .submit-row input, a.button {
+    background: #2BBBAD;
+}

@@ -4,16 +4,19 @@
 Tuesday: 
     (done) Add the ImageField to the Product model and update accordingly; 
     (done) get all the products loaded into the database; 
+
     (semi-done) also need to add a dropdown select option for size the user is ordering as well as color (1-2 hours) 
     (need to get all shirt colors to display in the dropdown box- will work on later.)
     Also need to make sure the shirt color and size transfer to the order-summary page and checkout page
 
 Wednesday: 
     (done) Create landing page; 
+
     update the links on products page to direct accordingly such as:
         category links, 
         (done) cart, 
         (done) logout, 
+
         and search (django-filter maybe- look into docs) 
 
 Thursday: 
@@ -50,6 +53,8 @@ Friday:
 Things I would like to have: 
 
     * If I run ahead of schedule- would like to have a modal pop up for login and registration on the landing page as opposed to redirecting to another html page to login and logout
+
+    *Would like to use AJAX when a user is creating an account- it is automatically telling them what is available or not with each keystroke 
 
     *Also would like to add a user account profile that they can see and update their information if necessary such as address, password, etc. 
 
