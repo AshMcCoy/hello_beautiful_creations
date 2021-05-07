@@ -15,3 +15,11 @@ div.breadcrumbs {
 .button, input[type=submit], input[type=button], .submit-row input, a.button {
     background: #2BBBAD;
 }
+
+.module caption, .inline-group h2 {
+    background: #2BBBAD;
+}
+
+.module h2 {
+    background: #2BBBAD;
+}

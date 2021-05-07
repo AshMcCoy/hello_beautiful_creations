@@ -139,6 +139,8 @@ def post(self, *args, **kwargs):
         if form.is_valid():
             street_address = form.cleaned_data.get('street_address')
             apartment_address = form.cleaned_data.get('apartment_address')
+            city = form.cleaned_data.get('city')
+            state= form.cleaned_data.get('state')
             country = form.cleaned_data.get('country')
             zip = form.cleaned_data.get('zip')
             same_billing_address = form.cleaned_data.get('same_billing_address')
@@ -149,6 +151,8 @@ def post(self, *args, **kwargs):
                 user = self.request.user,
                 street_address = street_address,
                 apartment_address = apartment_address,
+                city = city,
+                state = state,
                 country = country,
                 zip = zip
             )

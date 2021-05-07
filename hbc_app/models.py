@@ -122,6 +122,8 @@ class CheckoutAddress(models.Model):
     user= models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
     street_address = models.CharField(max_length= 100)
     apartment_address = models.CharField(max_length= 100)
+    city = models.CharField(max_length= 50, blank=True)
+    state = models.CharField(max_length=2, blank=True)
     country = CountryField(multiple= False)
     zip = models.CharField(max_length= 10)
 
