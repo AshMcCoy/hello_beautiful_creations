@@ -43,7 +43,7 @@ class Item(models.Model):
     price = models.FloatField()
     discount_price = models.FloatField(blank= True, null= True)
     category = models.CharField(choices= CATEGORY, max_length= 3)
-    image = models.ImageField(null= True, blank= True)
+    image = models.ImageField(null= True)
     description = models.TextField()
     shirt_color = models.CharField(max_length= 50, choices=CHOICES, null= True, blank=True)
     created_at = models.DateTimeField(auto_now_add=True)

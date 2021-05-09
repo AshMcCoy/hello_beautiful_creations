@@ -1,4 +1,5 @@
 from django import forms
+#from .models import Item
 from django_countries.fields import CountryField
 from django_countries.widgets import CountrySelectWidget
 
@@ -6,6 +7,11 @@ PAYMENT = (
     ('S', 'Stripe'),
     ('P', 'PayPal'),
 )
+
+#class ItemForm(forms.ModelForm):
+    #class Meta:
+        #model = Item
+        #fields = ['shirt_color']
 
 class CheckoutForm(forms.Form):
     street_address = forms.CharField(widget=forms.TextInput(attrs={

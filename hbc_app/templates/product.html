@@ -1,5 +1,4 @@
 {% extends 'base.html' %}
-
 {% block content %}
 
 <!--Main layout-->
@@ -35,7 +34,7 @@
                 <span class="mr-1">
                 <del>${{ object.price|floatformat:2 }}</del>
                 </span>
-                <span>${{ object.discount_price }}</span>
+                <span>${{ object.discount_price|floatformat:2 }}</span>
                 {% else %}
                 <span>${{ item.price|floatformat:2 }}</span>
                 {% endif %}
@@ -46,32 +45,10 @@
 
                 <p>{{ object.description }}</p>
 
-                {% comment %} <form class="d-flex justify-content-left">
-                <!-- Default input -->
-                <input type="number" value="1" aria-label="Search" class="form-control" style="width: 100px">
-                <button class="btn btn-primary btn-md my-0 p" type="submit">Add to cart
-                    <i class="fas fa-shopping-cart ml-1"></i>
-                </button>
-                </form> {% endcomment %}
+                
                 <div class="form-group">
-                    <select name="shirt_color_dropdown" class="form-select" aria-label= "Default select example">
-                        <option value="-1">Select Shirt Color</option>
-                        <option value="{{ item.shirt_color }}">{{ item.shirt_color }}</option>
-                    </select>
-                    <select name="size" class="form-select ml-3" aria-label= "Default select example">
-                        <option value="-1">Select Shirt Size</option>
-                        <option value="youth_extra_small">Youth Extra Small</option>
-                        <option value="youth_small">Youth Small</option>
-                        <option value="youth_medium">Youth Medium</option>
-                        <option value="youth_large">Youth Large</option>
-                        <option value="extra_small">Extra Small</option>
-                        <option value="small">Small</option>
-                        <option value="medium">Medium</option>
-                        <option value="large">Large</option>
-                        <option value="extra_large">Extra Large</option>
-                        <option value="2x">2X</option>
-                    </select>
-                </div>
+                <form method="POST">
+                {% csrf_token %}
                 <div class="mt-4">
                     <a href="{{ object.get_add_to_cart_url }}" class="btn btn-default btn-md my-0 p" >Add to cart
                         <i class="fas fa-shopping-cart ml-1"></i>
@@ -80,7 +57,7 @@
                         <i class="fas fa-trash ml-1"></i>
                     </a>
                 </div>
-
+                </form>
             </div>
             <!--Content-->
 

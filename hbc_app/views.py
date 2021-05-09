@@ -38,11 +38,11 @@ def add_to_cart(request, pk):
 
     if order_qs.exists():
         order = order_qs[0]
-
+        # check if the order item is in the order
         if order.items.filter(item__pk=item.pk).exists():
             order_item.quantity += 1
             order_item.save()
-            messages.info(request, "Added quantity Item")
+            messages.info(request, "This item quantity was updated")
             return redirect("hbc_app:order-summary")
         else:
             order.items.add(order_item)
@@ -65,6 +65,7 @@ def remove_from_cart(request, pk):
     )
     if order_qs.exists():
         order = order_qs[0]
+        #check if the order item is in the order
         if order.items.filter(item__pk=item.pk).exists():
             order_item = OrderItem.objects.filter(
                 item= item,
@@ -75,10 +76,10 @@ def remove_from_cart(request, pk):
             messages.info(request, "Item \""+order_item.item.item_name+"\" removed from your cart")
             return redirect("hbc_app:order-summary")
         else:
-            messages.info(request, "This Item  is not in your cart")
+            messages.info(request, "This Item is not in your cart")
             return redirect("hbc_app:order-summary", pk=pk)
     else:
-        messages.info(request, "You do not have an Order")
+        messages.info(request, "You do not have an active order")
         return redirect("hbc_app:order-summary", pk=pk)
 
 class OrderSummaryView(LoginRequiredMixin, View):
