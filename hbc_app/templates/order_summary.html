@@ -40,7 +40,7 @@
             <td>
             {% if order_item.item.discount_price %}
                 ${{ order_item.get_discount_item_price|floatformat:2 }} 
-                <span class="badge badge-success" >Saved ${{ order_item.get_amount_saved|floatformat:2 }}</span>
+                <span class="badge badge-secondary" >Saved ${{ order_item.get_amount_saved|floatformat:2 }}</span>
             {% else %}
                 ${{ order_item.get_total_item_price|floatformat:2 }}
             {% endif %}
@@ -66,8 +66,8 @@
 
         {% if object.get_total_price %}
         <tr>
-            <td colspan="4"><b>Total Order Price</b></td>
-            <td>${{ object.get_total_price|floatformat:2 }}</td>
+            <td colspan="4"><b>Order Total</b></td>
+            <td><b>${{ object.get_total_price|floatformat:2 }}</b></td>
         </tr>
         <tr>
             <td colspan="5">

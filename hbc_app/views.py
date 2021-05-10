@@ -6,7 +6,7 @@ from django.shortcuts import render, get_object_or_404, redirect
 from django.views.generic import ListView, DetailView, View
 from django.utils import timezone
 from .forms import CheckoutForm
-from .models import (Item, Order, OrderItem, CheckoutAddress)
+from .models import (Item, Order, OrderItem, BillingAddress)
 
 def landing(request):
     return render(request, 'landing.html')
@@ -92,7 +92,7 @@ class OrderSummaryView(LoginRequiredMixin, View):
             }
             return render(self.request, 'order_summary.html', context)
         except ObjectDoesNotExist:
-            messages.error(self.request, "You do not have an order")
+            messages.error(self.request, "You do not have an active order")
             return redirect("/")
 
 @login_required
@@ -144,11 +144,12 @@ def post(self, *args, **kwargs):
             state= form.cleaned_data.get('state')
             country = form.cleaned_data.get('country')
             zip = form.cleaned_data.get('zip')
-            same_billing_address = form.cleaned_data.get('same_billing_address')
-            save_info = form.cleaned_data.get('save_info')
+            #TODO: add functionality to these fields
+            #same_shipping_address = form.cleaned_data.get('same_shipping_address')
+            #save_info = form.cleaned_data.get('save_info')
             payment_option = form.cleaned_data.get('payment_option')
 
-            checkout_address = CheckoutAddress(
+            billing_address = BillingAddress(
                 user = self.request.user,
                 street_address = street_address,
                 apartment_address = apartment_address,
@@ -157,16 +158,22 @@ def post(self, *args, **kwargs):
                 country = country,
                 zip = zip
             )
-            checkout_address.save()
-            order.checkout_address = checkout_address
+            billing_address.save()
+            order.billing_address = billing_address
             order.save()
+            #TODO: add redirect to the selected payment option
             return redirect('hbc_app:checkout')
         messages.warning(self.request, "Failed Checkout")
         return redirect('hbc_app:checkout')
 
     except ObjectDoesNotExist:
-        messages.error(self.request, "You do not have an order")
+        messages.error(self.request, "You do not have an active order")
         return redirect('hbc_app:order-summary')
+
+class PaymentView(View):
+    def get(self, *args, **kwargs):
+        #order
+        return render(self.request, "payment.html")
 
 
 # Create your views here.

@@ -8,10 +8,10 @@ class ItemAdmin(admin.ModelAdmin):
     search_fields = ('item_name', 'category')
 
 class OrderAdmin(admin.ModelAdmin):
-    list_display = ('id', 'user', 'ordered_date', 'checkout_address')
+    list_display = ('id', 'user', 'ordered_date', 'billing_address')
     list_display_links = ('id', 'ordered_date')
     list_filter = ('ordered_date', 'items',)
-    search_fields = ('user', 'ordered_date', 'checkout_address')
+    search_fields = ('user', 'ordered_date', 'billing_address')
 
 class OrderItemAdmin(admin.ModelAdmin):
     list_display = ('id', 'user', 'item', 'quantity')

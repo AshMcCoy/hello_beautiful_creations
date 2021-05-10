@@ -1,18 +1,11 @@
 from django import forms
-#from .models import Item
 from django_countries.fields import CountryField
 from django_countries.widgets import CountrySelectWidget
 
 PAYMENT = (
     ('S', 'Stripe'),
-    ('P', 'PayPal'),
+    ('P', 'PayPal')
 )
-
-#class ItemForm(forms.ModelForm):
-    #class Meta:
-        #model = Item
-        #fields = ['shirt_color']
-
 class CheckoutForm(forms.Form):
     street_address = forms.CharField(widget=forms.TextInput(attrs={
         'class': 'form-control',
@@ -40,7 +33,7 @@ class CheckoutForm(forms.Form):
         'class': 'form-control'
     }))
 
-    same_billing_address = forms.BooleanField(required= False)
+    same_shipping_address = forms.BooleanField(required= False)
     save_info = forms.BooleanField(required=False)
     payment_option = forms.ChoiceField(
         widget= forms.RadioSelect, choices=PAYMENT)

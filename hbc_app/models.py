@@ -2,6 +2,7 @@ from django.conf import settings
 from django.db import models
 from django.shortcuts import reverse
 from django_countries.fields import CountryField
+from django.utils import timezone
 
 CATEGORY = (
     ('RB', 'Ribbon Bows'),
@@ -104,7 +105,7 @@ class Order(models.Model):
     start_date = models.DateTimeField(auto_now_add=True)
     ordered_date= models.DateTimeField()
     ordered = models.BooleanField(default= False)
-    checkout_address = models.ForeignKey('CheckoutAddress', related_name= "user_checkout_address", on_delete=models.SET_NULL, blank=True, null=True)
+    billing_address = models.ForeignKey('BillingAddress', on_delete=models.SET_NULL, blank=True, null=True)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
@@ -118,16 +119,20 @@ class Order(models.Model):
             total += order_item.get_final_price()
         return total
 
-class CheckoutAddress(models.Model):
-    user= models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
+class BillingAddress(models.Model):
+    user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
     street_address = models.CharField(max_length= 100)
     apartment_address = models.CharField(max_length= 100)
-    city = models.CharField(max_length= 50, blank=True)
-    state = models.CharField(max_length=2, blank=True)
+    city = models.CharField(max_length= 50)
+    state = models.CharField(max_length=2)
     country = CountryField(multiple= False)
     zip = models.CharField(max_length= 10)
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
 
     def __str__(self):
         return self.user.username
+
+
 
 # Create your models here.
