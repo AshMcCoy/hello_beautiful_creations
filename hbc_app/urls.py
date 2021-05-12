@@ -9,7 +9,8 @@ from .views import (
     reduce_quantity_item, 
     CheckoutView, 
     PaymentView, 
-    AddCouponView
+    AddCouponView,
+    RequestRefundView
 )
 #CreateItemForm
 
@@ -26,4 +27,5 @@ urlpatterns = [
     path('reduce-quantity-item/<pk>/', reduce_quantity_item, name='reduce-quantity-item'),
     path('checkout', CheckoutView.as_view(), name= 'checkout'),
     path('payment/<payment_option>/', PaymentView.as_view(), name='payment'),
+    path('request-refund/', RequestRefundView.as_view(), name='request-refund' )
 ]

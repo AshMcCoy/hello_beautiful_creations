@@ -102,11 +102,17 @@ class OrderItem(models.Model):
 
 class Order(models.Model):
     user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete= models.CASCADE)
+    ref_code= models.CharField(max_length= 20)
     items = models.ManyToManyField(OrderItem, related_name= "complete_order")
     start_date = models.DateTimeField(auto_now_add=True)
     ordered_date= models.DateTimeField()
     ordered = models.BooleanField(default= False)
     billing_address = models.ForeignKey('BillingAddress', on_delete=models.SET_NULL, blank=True, null=True)
+    in_process = models.BooleanField(default= False)
+    being_delivered = models.BooleanField(default= False)
+    received = models.BooleanField(default= False)
+    refund_requested = models.BooleanField(default= False)
+    refund_granted = models.BooleanField(default= False)
     coupon = models.ForeignKey('Coupon', on_delete=models.SET_NULL, blank=True, null=True)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
@@ -119,7 +125,8 @@ class Order(models.Model):
         total = 0
         for order_item in self.items.all():
             total += order_item.get_final_price()
-        total -= self.coupon.amount
+        if self.coupon:
+            total -= self.coupon.amount
         return total
 
 class BillingAddress(models.Model):
@@ -144,5 +151,14 @@ class Coupon(models.Model):
 
     def __str__(self):
         return self.code
+
+class Refund(models.Model):
+    order= models.ForeignKey('Order', on_delete=models.CASCADE)
+    reason= models.TextField()
+    accepted= models.BooleanField(default=False)
+    email= models.EmailField()
+
+    def __str__(self):
+        return f"{self.pk}"
 
 # Create your models here.

@@ -1,23 +1,78 @@
 from django.contrib import admin
-from .models import Item, OrderItem, Order, Coupon
+from .models import Item, OrderItem, Order, Coupon, Refund
 
 class ItemAdmin(admin.ModelAdmin):
-    list_display = ('id', 'item_name', 'available', 'image', 'category', 'price')
-    list_display_links = ('id', 'item_name')
-    list_filter = ('category', 'price')
-    search_fields = ('item_name', 'category')
+    list_display = [
+        'id', 
+        'item_name', 
+        'available', 
+        'image', 
+        'category', 
+        'price'
+    ]
+    list_display_links = ['id', 'item_name']
+    list_filter = ['category', 'price']
+    search_fields = ['item_name', 'category']
 
+def make_order_process(modeladmin, request, queryset):
+    queryset.update(in_process=True)
+
+make_order_process.short_description= "Update orders to In-Process"
+
+def make_order_shipped(modeladmin, request, queryset):
+    queryset.update(in_process=False, being_delivered=True)
+
+make_order_shipped.short_description= "Update orders to shipped"
+
+def make_order_received(modeladmin, request, queryset):
+    queryset.update(being_delivered=False, received= True)
+
+make_order_received.short_description = "Update orders to customer received"
+
+def make_refund_accepted(modeladmin, request, queryset):
+    queryset.update(refund_requested=False, refund_granted=True)
+
+make_refund_accepted.short_description= "Update orders to refund granted"
 class OrderAdmin(admin.ModelAdmin):
-    list_display = ('id', 'user', 'ordered', 'ordered_date', 'billing_address')
-    list_display_links = ('id', 'ordered_date')
-    list_filter = ('ordered_date', 'items',)
-    search_fields = ('user', 'ordered_date', 'billing_address')
+    list_display = [
+        'id', 
+        'user', 
+        'ordered', 
+        'ordered_date', 
+        'coupon',
+        'billing_address', 
+        'in_process',
+        'being_delivered', 
+        'received', 
+        'refund_requested', 
+        'refund_granted'
+    ]
+    list_display_links = [
+        'id', 
+        'user', 
+        'billing_address', 
+        'coupon'
+    ]
+    list_filter = [
+        'ordered', 
+        'in_process',
+        'being_delivered',
+        'received',
+        'refund_requested',
+        'refund_granted'
+    ]
+    search_fields = [
+        'user', 
+        'ref_code',
+        'ordered_date', 
+        'billing_address']
+    actions= [make_order_process, make_order_shipped, make_order_received, make_refund_accepted]
 
 class OrderItemAdmin(admin.ModelAdmin):
-    list_display = ('id', 'user', 'item', 'quantity')
-    list_display_links = ('id', 'user', 'item')
-    list_filter = ('id', 'user')
-    search_fields = ('item', 'user')
+    list_display = ['id', 'user', 'item', 'quantity']
+    list_display_links = ['id', 'user', 'item']
+    list_filter = ['id', 'user']
+    search_fields = ['item', 'user']
     
 
 admin.site.register(Item, ItemAdmin)

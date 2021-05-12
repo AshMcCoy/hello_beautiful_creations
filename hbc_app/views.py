@@ -5,8 +5,11 @@ from django.core.exceptions import ObjectDoesNotExist
 from django.shortcuts import render, get_object_or_404, redirect
 from django.views.generic import ListView, DetailView, View
 from django.utils import timezone
-from .forms import CheckoutForm, CouponForm
-from .models import (Item, Order, OrderItem, BillingAddress, Coupon)
+from .forms import CheckoutForm, CouponForm, RefundForm
+from .models import Item, Order, OrderItem, BillingAddress, Coupon, Refund
+import random
+import string
+
 
 def landing(request):
     return render(request, 'landing.html')
@@ -14,6 +17,9 @@ class HomeView(ListView):
     model = Item
     paginate_by = 12
     template_name = "home.html"
+
+def create_ref_code():
+    return ''.join(random.choices(string.ascii_lowercase + string.digits, k=20))
 
 class ProductView(DetailView):
     model= Item
@@ -190,6 +196,13 @@ class PaymentView(View):
             messages.warning(self.request, "You have not entered a billing address")
             return redirect('hbc_app:checkout')
 
+            #TODO:need to create payment
+
+            #TODO:assign the payment to the order
+
+            #TODO: assign the ref code in the assigned order
+                    #order.ref_code = create_ref_code()
+
 def get_coupon(request, code):
     try:
         coupon= Coupon.objects.get(code=code)
@@ -213,5 +226,35 @@ class AddCouponView(View):
                 messages.info(self.request, "You do not have an active order")
                 return redirect("hbc_app:checkout")
 
+class RequestRefundView(View):
+    def get(self, *args, **kwargs):
+        form = RefundForm()
+        context = {
+            'form': form
+        }
+        return render(self.request, "request_refund.html", context)
+    def post(self, *args, **kwargs):
+        form = RefundForm(self.request.POST)
+        if form.is_valid():
+            ref_code = form.cleaned_data.get('ref_code')
+            message = form.cleaned_data.get('message')
+            email= form.cleaned_data.get('email')
+            #edit the order
+            try:
+                order= Order.objects.get(ref_code= ref_code)
+                order.refund_requested = True
+                order.save()
 
-# Create your views here.
+                #store the refund
+                refund = Refund()
+                refund.order= order
+                refund.reason = message
+                refund.email = email
+                refund.save()
+                
+                messages.info(self.request, "Your request was received.")
+                return redirect("hbc_app:request-refund")
+
+            except ObjectDoesNotExist:
+                messages.info(self.request, "This order does not exist")
+                return redirect("hbc_app:request-refund")
