@@ -126,54 +126,64 @@ def reduce_quantity_item(request, pk):
 
 class CheckoutView(View):
     def get(self, *args, **kwargs):
-        form = CheckoutForm()
-        context = {
-            'form': form
-        }
-        return render(self.request, 'checkout.html', context)
+        try:
+            order = Order.objects.get(user=self.request.user, ordered=False)
+            form = CheckoutForm()
+            context = {
+                'form': form,
+                'order': order
+            }
+            return render(self.request, 'checkout.html', context)
+        except ObjectDoesNotExist:
+            messages.error(self.request, "You do not have an active order")
+            return redirect('hbc_app:order-summary')
+            
+    
+    def post(self, *args, **kwargs):
+        form = CheckoutForm(self.request.POST or None)
+        try:
+            order = Order.objects.get(user=self.request.user, ordered= False)
+            if form.is_valid():
+                street_address = form.cleaned_data.get('street_address')
+                apartment_address = form.cleaned_data.get('apartment_address')
+                city = form.cleaned_data.get('city')
+                state= form.cleaned_data.get('state')
+                country = form.cleaned_data.get('country')
+                zip = form.cleaned_data.get('zip')
+                    #TODO: add functionality to these fields
+                    #same_shipping_address = form.cleaned_data.get('same_shipping_address')
+                    #save_info = form.cleaned_data.get('save_info')
+                #payment_option = form.cleaned_data.get('payment_option')
 
-def post(self, *args, **kwargs):
-    form = CheckoutForm(self.request.POST or None)
-
-    try:
-        order = Order.objects.get(user=self.request.user, ordered= False)
-        if form.is_valid():
-            street_address = form.cleaned_data.get('street_address')
-            apartment_address = form.cleaned_data.get('apartment_address')
-            city = form.cleaned_data.get('city')
-            state= form.cleaned_data.get('state')
-            country = form.cleaned_data.get('country')
-            zip = form.cleaned_data.get('zip')
-            #TODO: add functionality to these fields
-            #same_shipping_address = form.cleaned_data.get('same_shipping_address')
-            #save_info = form.cleaned_data.get('save_info')
-            payment_option = form.cleaned_data.get('payment_option')
-
-            billing_address = BillingAddress(
-                user = self.request.user,
-                street_address = street_address,
-                apartment_address = apartment_address,
-                city = city,
-                state = state,
-                country = country,
-                zip = zip
-            )
-            billing_address.save()
-            order.billing_address = billing_address
-            order.save()
-            #TODO: add redirect to the selected payment option
+                billing_address = BillingAddress(
+                    user = self.request.user,
+                    street_address = street_address,
+                    apartment_address = apartment_address,
+                    city = city,
+                    state = state,
+                    country = country,
+                    zip = zip
+                )
+                billing_address.save()
+                order.billing_address = billing_address
+                order.save()
+                    #TODO: add redirect to the selected payment option
             return redirect('hbc_app:checkout')
-        messages.warning(self.request, "Failed Checkout")
-        return redirect('hbc_app:checkout')
+            messages.warning(self.request, "Failed Checkout")
+            return redirect('hbc_app:checkout')
 
-    except ObjectDoesNotExist:
-        messages.error(self.request, "You do not have an active order")
-        return redirect('hbc_app:order-summary')
+        except ObjectDoesNotExist:
+            messages.error(self.request, "You do not have an active order")
+            return redirect('hbc_app:order-summary')
 
 class PaymentView(View):
     def get(self, *args, **kwargs):
         #order
-        return render(self.request, "payment.html")
+        order = Order.objects.get(user=self.request.user, ordered=False)
+        context = {
+            'order': order
+        }
+        return render(self.request, "payment.html", context)
 
 
 # Create your views here.

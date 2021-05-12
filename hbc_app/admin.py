@@ -20,7 +20,6 @@ class OrderItemAdmin(admin.ModelAdmin):
     search_fields = ('item', 'user')
     
 
-
 admin.site.register(Item, ItemAdmin)
 admin.site.register(OrderItem, OrderItemAdmin)
 admin.site.register(Order, OrderAdmin)

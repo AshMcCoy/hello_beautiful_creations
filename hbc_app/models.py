@@ -68,7 +68,7 @@ class Item(models.Model):
         return reverse("hbc_app:remove-from-cart", kwargs={
             "pk": self.pk
         })
-
+        
 class OrderItem(models.Model):
     user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete= models.CASCADE)
     ordered = models.BooleanField(default= False)
