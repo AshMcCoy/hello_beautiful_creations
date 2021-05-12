@@ -64,6 +64,12 @@
 
         {% endfor %}
 
+        {% if object.coupon %}
+        <tr>
+            <td colspan="4"><b>Coupon Applied</b></td>
+            <td><b>-${{ object.coupon.amount|floatformat:2 }}</b></td>
+        </tr>
+        {% endif %}
         {% if object.get_total_price %}
         <tr>
             <td colspan="4"><b>Order Total</b></td>

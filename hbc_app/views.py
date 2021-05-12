@@ -5,8 +5,8 @@ from django.core.exceptions import ObjectDoesNotExist
 from django.shortcuts import render, get_object_or_404, redirect
 from django.views.generic import ListView, DetailView, View
 from django.utils import timezone
-from .forms import CheckoutForm
-from .models import (Item, Order, OrderItem, BillingAddress)
+from .forms import CheckoutForm, CouponForm
+from .models import (Item, Order, OrderItem, BillingAddress, Coupon)
 
 def landing(request):
     return render(request, 'landing.html')
@@ -92,7 +92,7 @@ class OrderSummaryView(LoginRequiredMixin, View):
             }
             return render(self.request, 'order_summary.html', context)
         except ObjectDoesNotExist:
-            messages.error(self.request, "You do not have an active order")
+            messages.warning(self.request, "You do not have an active order")
             return redirect("/")
 
 @login_required
@@ -131,11 +131,12 @@ class CheckoutView(View):
             form = CheckoutForm()
             context = {
                 'form': form,
+                'couponform': CouponForm(),
                 'order': order
             }
             return render(self.request, 'checkout.html', context)
         except ObjectDoesNotExist:
-            messages.error(self.request, "You do not have an active order")
+            messages.warning(self.request, "You do not have an active order")
             return redirect('hbc_app:order-summary')
             
     
@@ -173,17 +174,44 @@ class CheckoutView(View):
             return redirect('hbc_app:checkout')
 
         except ObjectDoesNotExist:
-            messages.error(self.request, "You do not have an active order")
+            messages.warning(self.request, "You do not have an active order")
             return redirect('hbc_app:order-summary')
 
 class PaymentView(View):
     def get(self, *args, **kwargs):
         #order
         order = Order.objects.get(user=self.request.user, ordered=False)
-        context = {
-            'order': order
-        }
-        return render(self.request, "payment.html", context)
+        if order.billing_address:
+            context = {
+                'order': order
+            }
+            return render(self.request, "payment.html", context)
+        else:
+            messages.warning(self.request, "You have not entered a billing address")
+            return redirect('hbc_app:checkout')
+
+def get_coupon(request, code):
+    try:
+        coupon= Coupon.objects.get(code=code)
+        return coupon
+    except ObjectDoesNotExist:
+        messages.info(request, "This coupon does not exist")
+        return redirect("hbc_app:checkout")
+
+class AddCouponView(View):
+    def post(self, *args, **kwargs):
+        form= CouponForm(self.request.POST or None)
+        if form.is_valid():
+            try:
+                code= form.cleaned_data.get('code')
+                order = Order.objects.get(user=request.user, ordered=False)
+                order.coupon = get_coupon(self.request, code)
+                order.save()
+                messages.success(self.request, "Successfully added coupon")
+                return redirect("hbc_app:checkout")
+            except ObjectDoesNotExist:
+                messages.info(self.request, "You do not have an active order")
+                return redirect("hbc_app:checkout")
 
 
 # Create your views here.
