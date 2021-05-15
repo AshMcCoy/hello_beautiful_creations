@@ -1,11 +1,17 @@
 #header {
     background: #365B6D;
     color: white;
+    padding: 3px 40px 25px;
+}
+
+.login #header {
+    height: auto;
+    padding: 2px 0px 25px 0px;
+    justify-content: center;
 }
 
 #branding h1 {
     color: white;
-    height: 75px;
 }
 
 div.breadcrumbs {

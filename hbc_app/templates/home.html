@@ -3,7 +3,7 @@
 {% block content %}
 
     <main>
-        <div class="container mt-5 pt-1" style="background-color: lightgray;">
+        <div class="container-fluid mt-5 pt-1"><!--style="background-color: lightgray;-->
 
         <!--Navbar-->
         <nav class="navbar navbar-expand-lg navbar-dark lighten-3 mb-5 mt-3" style="background-color: #F46977;">
@@ -70,15 +70,12 @@
             <div class="col-lg-3 col-md-6 mb-4">
 
                 <!--Card-->
-                <div class="card">
-
-                <!--Card image-->
+                <div>
                 <div class="view overlay">
                     {% if item.image %}
-                    <img src="{{ item.image.url }}" class="card-img-top"
-                    alt="product_image">
+                    <img src="{{ item.image.url }}" class="card-img-top" alt="product_image">
                     <a href="{{ item.get_absolute_url }}">
-                    <div class="mask rgba-white-slight"></div>
+                        <div class="mask rgba-white-slight"></div>
                     </a>
                     {% endif %}
                 </div>
@@ -90,12 +87,12 @@
                     </a>
                     <h5>
                     <strong>
-                        <a href="{{ item.get_absolute_url }}" class="dark-grey-text">{{ item.item_name }}
+                        <a href="{{ item.get_absolute_url }}" class="white-text">{{ item.item_name }}
                         </a>
                     </strong>
                     </h5>
 
-                    <h4 class="font-weight-bold blue-text">
+                    <h4 class="font-weight-bold text-default">
                     <strong>$
                     {% if item.discount_price %}
                     {{ item.discount_price|floatformat:2 }}
@@ -125,13 +122,13 @@
 
         <!--Pagination-->
         {% if is_paginated %}
-        <nav class="d-flex justify-content-center wow fadeIn">
-            <ul class="pagination pg-blue">
+        <nav class="d-flex justify-content-center wow fadeIn text-white">
+            <ul class="pagination">
 
             <!--Arrow left-->
             {% if page_obj.has_previous %}
             <li class="page-item">
-            <a class="page-link" href="?page={{ page_obj.previous_page_number }}" aria-label="Previous">
+            <a class="page-link text-white" href="?page={{ page_obj.previous_page_number }}" aria-label="Previous">
                 <span aria-hidden="true">&laquo;</span>
                 <span class="sr-only">Previous</span>
                 </a>
@@ -140,12 +137,12 @@
 
             <li class="page-item active">
                 <span class="current">
-                    Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}.
+                    Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}
                 </span>
 
             {% if page_obj.has_next %}
             <li class="page-item">
-                <a class="page-link" href="?page={{page_obj.next_page_number }}" aria-label="Next">
+                <a class="page-link text-white" href="?page={{page_obj.next_page_number }}" aria-label="Next">
                 <span aria-hidden="true">&raquo;</span>
                 <span class="sr-only">Next</span>
                 </a>

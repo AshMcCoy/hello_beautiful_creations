@@ -21,7 +21,7 @@ Wednesday:
 
 Thursday: 
     See what I can figure out about API's;
-    Update the checkout form and complete the checkout process;(2 hours)
+    done: Update the checkout form and complete the checkout process;(2 hours)
     schedule a 1-on-1 with instructor to discuss the API's and other things
 
 Friday: 
@@ -29,7 +29,7 @@ Friday:
     figure out why logo image is not showing up on the product detail page (2-3 hrs)
 
 Saturday: 
-    Begin admin dashboard; Complete Admin Login, and the html dashboard view (2-4 hrs)
+    done: Begin admin dashboard; Complete Admin Login, and the html dashboard view (2-4 hrs)
 
 Sunday: 
     Work on and try to complete the /admin-order/product-ImageField (2-3 hrs)
