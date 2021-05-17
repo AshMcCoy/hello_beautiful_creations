@@ -23,11 +23,11 @@
             <!-- Links -->
             <ul class="navbar-nav mr-auto">
                 <li class="nav-item active">
-                <a class="nav-link" href="#">All
+                <a class="nav-link" href="/home">All
                     <span class="sr-only">(current)</span>
                 </a>
                 </li>
-                {% for category in categories %}
+                {% for category in all_categories %}
                 <li class="nav-item">
                 <a class="nav-link" href="/category/{{category.id}}">{{category.name}}</a>
                 </li>
@@ -52,7 +52,7 @@
 
             <!--Grid row-->
             <div class="row wow fadeIn">
-            {% for item in object_list %}
+            {% for item in this_category.items.all %}
             <!--Grid column-->
             <div class="col-lg-3 col-md-6 mb-4">
 
@@ -60,7 +60,7 @@
                 <div>
                 <div class="view overlay">
                     {% if item.image %}
-                    <img src="{{ item.image.url }}" class="card-img-top" alt="product_image" height="350" width="350">
+                    <img src="{{ item.image.url }}" class="card-img-top" alt="product_image">
                     <a href="{{ item.get_absolute_url }}">
                         <div class="mask rgba-white-slight"></div>
                     </a>

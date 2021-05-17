@@ -1,5 +1,7 @@
 from django.contrib import admin
-from .models import Item, OrderItem, Order, Coupon, Refund, Address
+from .models import Item, OrderItem, Order, Coupon, Refund, Address, Category
+
+
 
 class ItemAdmin(admin.ModelAdmin):
     list_display = [
@@ -7,11 +9,10 @@ class ItemAdmin(admin.ModelAdmin):
         'item_name', 
         'available', 
         'image', 
-        'category', 
         'price'
     ]
     list_display_links = ['id', 'item_name']
-    list_filter = ['category', 'price']
+    list_filter = ['price']
     search_fields = ['item_name', 'category']
 
 def make_order_process(modeladmin, request, queryset):
@@ -33,6 +34,7 @@ def make_refund_accepted(modeladmin, request, queryset):
     queryset.update(refund_requested=False, refund_granted=True)
 
 make_refund_accepted.short_description= "Update orders to refund granted"
+
 class OrderAdmin(admin.ModelAdmin):
     list_display = [
         'id', 
@@ -96,5 +98,6 @@ admin.site.register(OrderItem, OrderItemAdmin)
 admin.site.register(Order, OrderAdmin)
 admin.site.register(Coupon)
 admin.site.register(Address, AddressAdmin)
+admin.site.register(Category)
 
 # Register your models here.

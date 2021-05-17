@@ -10,7 +10,9 @@ from .views import (
     CheckoutView, 
     PaymentView, 
     AddCouponView,
-    RequestRefundView
+    RequestRefundView,
+    category,
+    search
 )
 #CreateItemForm
 
@@ -19,7 +21,9 @@ app_name = 'hbc_app'
 urlpatterns = [
     path('', landing, name= 'landing'),
     path('home', HomeView.as_view(), name= 'home'),
+    path('category/<pk>/', category, name = 'category'),
     path('product/<pk>/', ProductView.as_view(), name= 'product'),
+    path('search', search, name= 'search'),
     path('add-to-cart/<pk>/', add_to_cart, name= 'add-to-cart'),
     path('add-coupon/', AddCouponView.as_view(), name= 'add-coupon'),
     path('remove-from-cart/<pk>/', remove_from_cart, name= 'remove-from-cart'),

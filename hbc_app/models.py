@@ -44,11 +44,21 @@ ADDRESS_CHOICES = (
     ('S', 'Shipping')
 )
 
+class Category(models.Model):
+    name= models.CharField(max_length= 50)
+    description= models.CharField(max_length=100)
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True) 
+
+    def __str__(self):
+        return f"Category Name:{self.name}"
+
 class Item(models.Model):
     item_name = models.CharField(max_length= 100)
     price = models.FloatField()
     discount_price = models.FloatField(blank= True, null= True)
-    category = models.CharField(choices= CATEGORY, max_length= 3)
+    #category = models.CharField(choices= CATEGORY, max_length= 3)
+    category_name = models.ForeignKey(Category, related_name= "items", on_delete=models.CASCADE, null=True, blank=True)
     image = models.ImageField(null= True)
     description = models.TextField()
     shirt_color = models.CharField(max_length= 50, choices=CHOICES, null= True, blank=True)
