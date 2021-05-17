@@ -7,11 +7,13 @@ class ItemAdmin(admin.ModelAdmin):
     list_display = [
         'id', 
         'item_name', 
+        'category_name',
         'available', 
         'image', 
         'price'
     ]
     list_display_links = ['id', 'item_name']
+    list_editable= ['category_name']
     list_filter = ['price']
     search_fields = ['item_name', 'category']
 

@@ -21,8 +21,8 @@
             <div class="collapse navbar-collapse" id="basicExampleNav">
 
             <!-- Links -->
-            <ul class="navbar-nav mr-auto">
-                <li class="nav-item active">
+            <ul class="navbar-nav nav nav-tabs mr-auto">
+                <li class="nav-item">
                 <a class="nav-link" href="/home">All
                     <span class="sr-only">(current)</span>
                 </a>
@@ -60,7 +60,7 @@
                 <div>
                 <div class="view overlay">
                     {% if item.image %}
-                    <img src="{{ item.image.url }}" class="card-img-top" alt="product_image">
+                    <img src="{{ item.image.url }}" class="card-img-top" alt="product_image" height="350" width="400">
                     <a href="{{ item.get_absolute_url }}">
                         <div class="mask rgba-white-slight"></div>
                     </a>
