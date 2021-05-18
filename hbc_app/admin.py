@@ -95,10 +95,14 @@ class AddressAdmin(admin.ModelAdmin):
     list_filter = ['default', 'address_type']
     search_fields = ['user', 'street_address', 'apartment_address', 'zip']
 
+class CouponAdmin(admin.ModelAdmin):
+    list_display = ['code', 'amount']
+    list_editable = ['amount']
+
 admin.site.register(Item, ItemAdmin)
 admin.site.register(OrderItem, OrderItemAdmin)
 admin.site.register(Order, OrderAdmin)
-admin.site.register(Coupon)
+admin.site.register(Coupon, CouponAdmin)
 admin.site.register(Address, AddressAdmin)
 admin.site.register(Category)
 
