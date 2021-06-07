@@ -1,4 +1,4 @@
-#Hello Beautiful Creations E-Commerce Website
+# Hello Beautiful Creations E-Commerce Website
 
 An e-commerce site for a small home-based boutique business
 
@@ -9,3 +9,11 @@ An e-commerce site for a small home-based boutique business
     functionality to mark orders as in-process, shipped, or completed
     
   - Researched, wire framed, and designed UI with CSS, JavaScript, Bootstrap, MDBootstrap to ensure a seamless and engaging user experience
+
+Turn the sound on for a nice tune to follow along! 
+
+https://user-images.githubusercontent.com/77694729/121087165-b2e9cf80-c7a9-11eb-818f-6bf8a6cbe3f6.mp4
+
+
+
+
